@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: statefulset
+metadata:
+  name: postgres-deploy
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+            - name: POSTGRES_DB
+              value: "user_lotto_info"
+          volumeMounts:
+            - name: postgres-volume
+              mountPath: /var/lib/postgres
+      volumes:
+        - name: postgres-volume
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-volume
+  labels:
+    app: postgres
+spec:
+  capacity:
+    storage: 10Gi # Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce # ReadWriteOnce
+    # - ReadOnlyMany
+    # - ReadWriteMany
+    # - ReadWriteOncePod
+  hostPath:
+    path: /data
+  persistentVolumeReclaimPolicy: Retain
+  # 보존
+  storageClassName: postgres-storage
+  # claimRef:
+  #   name: mysql-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: postgres-storage
+  selector:
+    matchLabels:
+      app: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres
+  ports:
+    - targetPort: 5432
+      port: 5432

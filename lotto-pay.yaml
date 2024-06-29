@@ -14,11 +14,14 @@ spec:
     spec:
       containers:
         - name: payment
-          image: boondo/lotto-payment:latest
+          image: boondo/lotto-payment:prod
           resources:
             limits:
               cpu: 500m
               memory: 500Mi
+          env:
+            - name: profiles
+              value: prod
           ports:
             - containerPort: 8080
 ---

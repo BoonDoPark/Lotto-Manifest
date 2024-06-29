@@ -22,6 +22,8 @@ spec:
               value: '1234'
             - name: POSTGRES_DB
               value: 'user_lotto_info'
+            - name: POSTGRES_DB
+              value: 'lotto_win'
           volumeMounts:
             - name: postgres-volume
               mountPath: /var/lib/postgres/data

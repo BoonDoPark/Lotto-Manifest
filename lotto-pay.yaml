@@ -20,11 +20,11 @@ spec:
               cpu: 500m
               memory: 500Mi
           env:
-            - name: "profiles"
+            - name: profiles
               value: "prod"
-            - name: "user"
+            - name: user
               value: "postgres"
-            - name: "password"
+            - name: password
               value: "1234"
           ports:
             - containerPort: 8080

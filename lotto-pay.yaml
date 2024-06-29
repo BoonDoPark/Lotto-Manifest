@@ -15,10 +15,6 @@ spec:
       containers:
         - name: payment
           image: boondo/lotto-payment:latest
-          resources:
-            limits:
-              cpu: 500m
-              memory: 500Mi
           env:
             - name: profile
               value: "latest"

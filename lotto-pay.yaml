@@ -22,6 +22,10 @@ spec:
           env:
             - name: profiles
               value: prod
+            - name: user
+              value: postgres
+            - name: password
+              value: "1234"
           ports:
             - containerPort: 8080
 ---

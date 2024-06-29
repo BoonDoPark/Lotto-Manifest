@@ -39,6 +39,7 @@ spec:
   ports:
     - targetPort: 8000
       port: 8000
+      nodePort: 32337
   type: NodePort
 
 ---

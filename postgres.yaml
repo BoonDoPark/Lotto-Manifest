@@ -45,10 +45,7 @@ spec:
   hostPath:
     path: /data
   persistentVolumeReclaimPolicy: Retain
-  # 보존
   storageClassName: postgres-storage
-  # claimRef:
-  #   name: mysql-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

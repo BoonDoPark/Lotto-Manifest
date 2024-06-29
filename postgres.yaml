@@ -23,7 +23,7 @@ spec:
             - name: POSTGRES_DB
               value: "user_lotto_info"
             - name: POSTGRES_DB
-              value: ""
+              value: "lotto_win"
           volumeMounts:
             - name: postgres-volume
               mountPath: /var/lib/postgres

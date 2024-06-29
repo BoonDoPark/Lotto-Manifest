@@ -17,6 +17,17 @@ spec:
           image: boondo/lotto-analytics:latest
           ports:
             - containerPort: 8000
+          env:
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: "1234"
+            - name: DB_NAME
+              value: lotto
+            - name: DB_PORT
+              value: 5432
+            - name: DB_URL
+              value: postgres-service
 ---
 apiVersion: v1
 kind: Service

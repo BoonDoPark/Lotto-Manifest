@@ -21,7 +21,7 @@ spec:
             - name: POSTGRES_PASSWORD
               value: '1234'
             - name: POSTGRES_DB
-              value: 'user_lotto_info'
+              value: 'lotto'
           volumeMounts:
             - name: postgres-volume
               mountPath: /var/lib/postgres/data
@@ -70,83 +70,6 @@ metadata:
 spec:
   selector:
     app: postgres
-  ports:
-    - targetPort: 5432
-      port: 5432
-      protocol: TCP
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: postgres-dep
-spec:
-  selector:
-    matchLabels:
-      app: postgres2
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: postgres2
-    spec:
-      containers:
-        - name: postgres
-          image: postgres:latest
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_PASSWORD
-              value: '1234'
-            - name: POSTGRES_DB
-              value: 'lotto_win'
-          volumeMounts:
-            - name: postgres-volume2
-              mountPath: /var/lib/postgres/data
-      volumes:
-        - name: postgres-volume
-          persistentVolumeClaim:
-            claimName: postgres-pvc2
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: postgres-volume2
-  labels:
-    app: postgres2
-spec:
-  capacity:
-    storage: 10Gi # Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce 
-  hostPath:
-    path: /data
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: postgres-storage
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pvc2
-spec:
-  accessModes:
-    - ReadWriteOnce
-  volumeMode: Filesystem
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: postgres-storage
-  selector:
-    matchLabels:
-      app: postgres2
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres-service2
-spec:
-  selector:
-    app: postgres2
   ports:
     - targetPort: 5432
       port: 5432

@@ -19,15 +19,15 @@ spec:
             - containerPort: 8000
           env:
             - name: DB_USERNAME
-              value: postgres
+              value: "postgres"
             - name: DB_PASSWORD
               value: "1234"
             - name: DB_NAME
-              value: lotto
+              value: "lotto"
             - name: DB_PORT
-              value: 5432
+              value: "5432"
             - name: DB_URL
-              value: postgres-service
+              value: "postgres-service"
 ---
 apiVersion: v1
 kind: Service

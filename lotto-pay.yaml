@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: payment
-          image: boondo/lotto-payment:latest
+          image: boondo/lotto-payment:prod
           env:
             - name: profile
               value: "prod"

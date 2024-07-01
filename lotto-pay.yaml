@@ -17,7 +17,7 @@ spec:
           image: boondo/lotto-payment:latest
           env:
             - name: profile
-              value: "latest"
+              value: "prod"
             - name: user
               value: "postgres"
             - name: password

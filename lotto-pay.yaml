@@ -15,6 +15,7 @@ spec:
       containers:
         - name: payment
           image: boondo/lotto-payment:prod
+          imagePullPolicy: Always
           env:
             - name: profile
               value: "prod"

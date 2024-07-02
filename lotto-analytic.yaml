@@ -15,6 +15,7 @@ spec:
       containers:
         - name: analytics
           image: boondo/lotto-analytics:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           env:
